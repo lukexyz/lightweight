@@ -1,24 +1,16 @@
-"""
-HOW TO USE
-
-1. change `filename` to video path
-
-2. > python vid2frame.py 
-
-"""
-
-
 import cv2
 import numpy as np
 import os
 
 # Playing video from file:
-filename = '02_luke_sunlight'
-cap = cv2.VideoCapture(f'{filename}.mp4')
+path = 'C:/Python/lightweight/data/04_saturday_sesh/'
+filename = '04_saturday_sesh_charlotte' #no .mp4
+output_folder = 'C:/Python/lightweight/data/04_saturday_sesh/raw'
+cap = cv2.VideoCapture(path+filename+'.mp4')
 
 try:
-    if not os.path.exists(filename):
-        os.makedirs(filename)
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 except OSError:
     print ('Error: Creating directory of data')
 
@@ -27,8 +19,8 @@ while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
     # Saves image of the current frame in jpg file
-    name = f'./{filename}/{filename}_frame{currentFrame}.jpg'
-    print ('Creating...' + name)
+    name = f'{output_folder}/{filename}_frame{currentFrame}.jpg'
+    print ('Saving file:' + name)
     cv2.imwrite(name, frame)
 
     # To stop duplicate images

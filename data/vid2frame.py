@@ -1,9 +1,19 @@
+"""
+HOW TO USE
+
+1. change `filename` to video path
+
+2. > python vid2frame.py 
+
+"""
+
+
 import cv2
 import numpy as np
 import os
 
 # Playing video from file:
-filename = 'lift_lucy_01'
+filename = '02_luke_sunlight'
 cap = cv2.VideoCapture(f'{filename}.mp4')
 
 try:
@@ -16,9 +26,8 @@ currentFrame = 0
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
-
     # Saves image of the current frame in jpg file
-    name = f'./{filename}/frame' + str(currentFrame) + '.jpg'
+    name = f'./{filename}/{filename}_frame{currentFrame}.jpg'
     print ('Creating...' + name)
     cv2.imwrite(name, frame)
 

@@ -22,7 +22,10 @@ except: print("No GPU detected")
 
 
 # ================== OpenCV Video Capture =================== #
-cap = cv2.VideoCapture(0)
+
+# cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('data/02_luke_sunlight_540p.mp4')
+
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 print('\nFrame width:', frame_width)
@@ -33,6 +36,7 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 
 _t = {'fps': Timer()}
 _nn = {'fps': Timer()}
+ret = True
 console = Console()
 
 
@@ -40,14 +44,13 @@ def load_model():
     # Initialize model weights
     nn_dir = Path('models/lw_nb02.pkl')
     net = load_learner(nn_dir)
-    console.log(f"[i]{nn_dir}[/i] :thumbs_up: [green]model loaded[/green]\n")
+    console.log(f"[i]{nn_dir}[/i] [green]> model loaded[/green] :heavy_check_mark: \n")
     return net
 
 # Initialize model
 net = load_model()
 
-
-while True:
+while ret == True:
     _t['fps'].tic()
 
     # Capture frame and mirror horizontal
@@ -60,7 +63,7 @@ while True:
     print(f'\t▷ {preds[0]} ({max(preds[2]):0.4f})')
 
     # Resize for output
-    frame = cv2.resize(frame, None, fx=1.5, fy=1.5)
+    frame = cv2.resize(frame, None, fx=1, fy=1)
 
     # Render FPS
     _t['fps'].toc()

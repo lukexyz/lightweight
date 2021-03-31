@@ -38,6 +38,7 @@ _t = {'fps': Timer()}
 _nn = {'fps': Timer()}
 ret = True
 console = Console()
+df = pd.DataFrame(columns=['pred', 'conf', 'time'])
 
 
 def load_model():
@@ -47,7 +48,6 @@ def load_model():
     console.log(f"[i]{nn_dir}[/i] [green]> model loaded[/green] :heavy_check_mark: \n")
     return net
 
-# Initialize model
 net = load_model()
 
 while ret == True:
@@ -60,12 +60,19 @@ while ret == True:
 
     # nn
     preds = net.predict(frame)
-    print(f'\t▷ {preds[0]} ({max(preds[2]):0.4f})')
+
+    pose = preds[0]
+    conf = f'{max(preds[2]):0.4f}'
+    delta_t = round(_t['fps'].toc(), 2)
+    print(f'\t▷ {pose} ({conf})')
+    
+    df.loc[len(df.index)] = [pose, conf, delta_t]  # adds row at end (not performant)
+    print(df.tail(10))
 
     # Resize for output
     frame = cv2.resize(frame, None, fx=1, fy=1)
 
-    # Render FPS
+    # Render Overlay
     _t['fps'].toc()
     fps = 'FPS: {:.3f}'.format(1 / _t['fps'].diff)
     cv2.putText(frame, fps, (11, 15), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
@@ -73,6 +80,9 @@ while ret == True:
     cv2.putText(frame, res, (11, 33), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
 
     
+    cv2.putText(frame, pose, (11, 50), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
+
+
     # Display headtracking frame
     cv2.imshow('Webcam: lightweight', frame)
 

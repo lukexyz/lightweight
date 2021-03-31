@@ -1,4 +1,4 @@
-# `lightweight` 💪🎯💪 
+# `lightweight` 💪🤪💪 
 
 ## Installation
 

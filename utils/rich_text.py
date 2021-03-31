@@ -1,3 +1,11 @@
+'''
+examples:
+
+python -m rich.live
+python -m rich.box
+'''
+
+
 from time import sleep
 from rich.console import Console
 import os
@@ -40,7 +48,7 @@ table.add_row(
 )
 console.print(table)
 
-
+console.rule("[bold red]Chapter 2")
 
 # ----------- Task looper ----------- #
 tasks = [f"task {n}" for n in range(1, 6)]
@@ -50,3 +58,9 @@ with console.status("[bold green]Working on tasks...") as status:
         task = tasks.pop(0)
         sleep(0.5)
         console.log(f"{task} complete")
+
+
+from rich.panel import Panel
+from rich import print
+print(Panel("Processing tasks: [green]success :heavy_check_mark:", title="Process"))
+

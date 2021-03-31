@@ -1,3 +1,13 @@
+'''
+examples:
+
+> python -m rich.live
+
+source:
+https://github.com/willmcgugan/rich/blob/11c305e1722a81c553a41fb9358f1058231757c5/rich/live.py
+'''
+
+
 import time
 import random
 

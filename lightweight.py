@@ -45,6 +45,7 @@ def main(vid:Param("Use video sample?", store_true)):
 
     if vid:
         cap = cv2.VideoCapture('data/squat_loop_540p.mp4')
+        # or 'data/squat_loop_540p.mp4'
         # or 'data/02_luke_sunlight_540p.mp4'
     else:
         cap = cv2.VideoCapture(0)
@@ -62,13 +63,13 @@ def main(vid:Param("Use video sample?", store_true)):
     ret = True
     fastprogress.fastprogress.NO_BAR = True
     fastprogress.fastprogress.FLUSH = False
-    pose_dict: Dict[Tuple[str, str], float] = {}
+    pose_dict: Dict[Tuple[str, str], [float, float]] = {}
     buffer_length = 10
     n = 0
 
     def load_model():
         # Initialize model weights
-        nn_dir = Path('models/lw_nb02.pkl')
+        nn_dir = Path('models/lw_nb04_ap2.pkl')  # previously lw_nb02.pkl
         net = load_learner(nn_dir)
         console.log(f"[i]{nn_dir}[/i] [green]> model loaded[/green] :heavy_check_mark: \n")
         return net
@@ -84,6 +85,7 @@ def main(vid:Param("Use video sample?", store_true)):
 
             # Capture frame and mirror horizontal
             ret, frame = cap.read()
+            if not ret: break
             frame = cv2.flip(frame, 1)
             x0, y0 = frame.shape[0], frame.shape[1]
 
@@ -93,35 +95,32 @@ def main(vid:Param("Use video sample?", store_true)):
             pose = preds[0]
             conf = max(preds[2])
             delta_t = 1000*round(_t['fps'].toc(), 4)
-            #print(f'\t▷ {pose} ({conf})')
 
             # ----------- table --------------
             if len(pose_dict) > buffer_length - 1:
                 pose_dict.pop(list(pose_dict.keys())[0])
 
-            pose_dict[(f'{n}', pose)] = conf
+            pose_dict[(f'{n}', pose)] = [conf, delta_t]
 
             table = Table(title="Pose Estimation")
             table.add_column("frame")
             table.add_column("pose")
             table.add_column("conf")
-            for ((n_frame, pred), conf) in pose_dict.items():
+            table.add_column("process_ms")
+            for ((n_frame, pred), [conf, delta_t]) in pose_dict.items():
                 table.add_row(n_frame,
                             Text(f'▷{pred}'),
                             Text(f"{conf:.4f}", 
-                                    style="white" if conf < 0.9 else "green")
+                                    style="white" if conf < 0.8 else "green"),
+                            Text(f'{delta_t:.0f}'),
                             )
 
-            # Live table
-            # exchange_rate = 0.12345
-            # table = Table('pred', 'conf', 'process_ms')
-
-            # # style="red" if exchange_rate < 1.0 else "green",
-            # table.add_row(Text(f"▷ {pose}", style="magenta"),
-            #               f"{conf}",
-            #               f"{delta_t:0.1f}")
-
             live_table.update(Align.center(table))
+
+            # Calculate current pose
+            # if n > 3:
+            #     if list(pose_dict.keys())[n-1][1] == list(pose_dict.keys())[n-2][1]:
+            #         print('twofer')
 
             # Resize for video output
             frame = cv2.resize(frame, None, fx=1, fy=1)

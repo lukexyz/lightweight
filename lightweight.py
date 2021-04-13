@@ -40,11 +40,9 @@ def main(vid:Param("Use video sample?", store_true)):
         torch.cuda.device(0)
     except: console.log("No GPU detected")
 
-
     # ================== OpenCV Video Capture =================== #
-
     if vid:
-        cap = cv2.VideoCapture('data/squat_loop_540p.mp4')
+        cap = cv2.VideoCapture('data/AlphaPose_squat_loop_540p.mp4')
         # or 'data/squat_loop_540p.mp4'
         # or 'data/02_luke_sunlight_540p.mp4'
     else:
@@ -91,7 +89,6 @@ def main(vid:Param("Use video sample?", store_true)):
 
             # nn
             preds = net.predict(frame)
-
             pose = preds[0]
             conf = max(preds[2])
             delta_t = 1000*round(_t['fps'].toc(), 4)
@@ -117,11 +114,6 @@ def main(vid:Param("Use video sample?", store_true)):
 
             live_table.update(Align.center(table))
 
-            # Calculate current pose
-            # if n > 3:
-            #     if list(pose_dict.keys())[n-1][1] == list(pose_dict.keys())[n-2][1]:
-            #         print('twofer')
-
             # Resize for video output
             frame = cv2.resize(frame, None, fx=1, fy=1)
 
@@ -146,10 +138,8 @@ def main(vid:Param("Use video sample?", store_true)):
             elif k == ord('r'):   # RESET ORIENTATION
                 print('Key press: R')
 
-
     cap.release()
     cv2.destroyAllWindows()
-
 
 if __name__ == '__main__':
     main()

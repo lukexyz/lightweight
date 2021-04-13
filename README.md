@@ -37,4 +37,8 @@ git clone https://github.com/MVIG-SJTU/AlphaPose.git
 # git pull origin pull/592/head if you use PyTorch>=1.5
 cd AlphaPose
 
+# 4. install
+-- export PATH=/usr/local/cuda/bin/:$PATH
+-- export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
+python -m pip install cython
 ```

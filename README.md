@@ -31,6 +31,22 @@ conda activate alphapose
 
 # 2. Install PyTorch
 conda install pytorch==1.1.0 torchvision==0.3.0
+```
+
+## tf-Openpose Installation
+```sh
+git clone https://github.com/infocom-tpo/tf-openpose.git
+cd tf-openpose
+
+conda create -n tf-openpose python=3.6 pip jupyter
+conda activate tf-openpose
+pip install tensorflow==1.3.0
+pip install opencv-python==3.4.3.18
+pip install -r requirements.txt
+
+
+python inference.py --model=mobilenet --imgpath=./images/golf.jpg
+```
 
 # 3. Get AlphaPose
 git clone https://github.com/MVIG-SJTU/AlphaPose.git

@@ -33,6 +33,18 @@ conda activate alphapose
 conda install pytorch==1.1.0 torchvision==0.3.0
 ```
 
+# 3. Get AlphaPose
+```sh
+git clone https://github.com/MVIG-SJTU/AlphaPose.git
+# git pull origin pull/592/head if you use PyTorch>=1.5
+cd AlphaPose
+
+# 4. install
+-- export PATH=/usr/local/cuda/bin/:$PATH
+-- export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
+python -m pip install cython
+```
+
 ## tf-Openpose Installation
 ```sh
 git clone https://github.com/infocom-tpo/tf-openpose.git
@@ -44,17 +56,7 @@ pip install tensorflow==1.3.0
 pip install opencv-python==3.4.3.18
 pip install -r requirements.txt
 
-
+# might need to rename model dir from here https://qiita.com/kotauchisunsun/items/bdbdca2ddb9036e29ab1
+python realtime_webcam.py --camera=0 --model=mobilenet --zoom=1.0
 python inference.py --model=mobilenet --imgpath=./images/golf.jpg
-```
-
-# 3. Get AlphaPose
-git clone https://github.com/MVIG-SJTU/AlphaPose.git
-# git pull origin pull/592/head if you use PyTorch>=1.5
-cd AlphaPose
-
-# 4. install
--- export PATH=/usr/local/cuda/bin/:$PATH
--- export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
-python -m pip install cython
 ```

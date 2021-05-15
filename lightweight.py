@@ -46,7 +46,7 @@ def main(vid:Param("Use video sample?", store_true)):
         # or 'data/squat_loop_540p.mp4'
         # or 'data/02_luke_sunlight_540p.mp4'
     else:
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(2)
 
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))

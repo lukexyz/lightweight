@@ -134,7 +134,7 @@ def main(vid:Param("Use video sample?", store_true),
             cv2.putText(frame, f'{pose} ({conf:0.4})', (11, 50), font, 0.35, (0, 255, 0), 1, cv2.LINE_AA)
 
             # --> (pose label) Big text 
-            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (5, 10, 5), 6, cv2.LINE_AA)
             cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (0, 255, 0), 2, cv2.LINE_AA)
 
             # OpenCV Show frame

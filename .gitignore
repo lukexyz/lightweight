@@ -3,6 +3,7 @@
 data/*/
 data/*.mp4
 models/
+AlphaPose/
 
 
 

@@ -1,5 +1,6 @@
 
-# 💪😬💪 `light`  💪🤪💪  `weight`  💪😙💪
+# `lightweight` 💪🎯💪
+
 
 </br>  
 
@@ -10,10 +11,11 @@
 > conda activate lightweight
 # webcam
 > python lightweight.py 
-# sample vid
-> python lightweight.py --vid
+# sample vid 
+> python lightweight.py --vid --saveframe
 ```
 
+💪😬💪 💪🤪💪 💪😙💪
 
 ## Installation
 

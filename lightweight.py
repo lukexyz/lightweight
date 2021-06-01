@@ -149,10 +149,9 @@ def main(vid:Param("Use video sample?", store_true),
             cv2.putText(frame, f'Squats: {squats}', (11, frame_height-100), font, 2, (5, 10, 5), 6, cv2.LINE_AA)
             cv2.putText(frame, f'Squats: {squats}', (11, frame_height-100), font, 2, (255, 255, 255), 2, cv2.LINE_AA)
             if (pose == '07_squatDown') & (squats >= 2): 
-                cv2.putText(frame, f'lightweight baby', (500, frame_height-100), font, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
                 cv2.putText(frame, f'lightweight baby', (500, frame_height-100), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
             if pose == '06_overheadPress': 
-                cv2.putText(frame, f'nothing but a peanut', (300, 150), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+                cv2.putText(frame, f'nothing but a peanut', (100, 150), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
 
 
             # OpenCV Show frame

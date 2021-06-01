@@ -136,11 +136,11 @@ def main(vid:Param("Use video sample?", store_true),
 
             # Render Overlay
             _t['fps'].toc()
-            fps = 'FPS: {:.3f}'.format(1 / _t['fps'].diff)
+            fps = f'({n}) FPS: {1/_t["fps"].diff:.03f}'
             cv2.putText(frame, fps, (11, 15), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
-            in_res = 'Intput res: {}x{}'.format(frame.shape[1], frame.shape[0])
+            in_res = f'Intput res: {frame.shape[1]}x{frame.shape[0]}'
             cv2.putText(frame, in_res, (11, 33), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
-            out_res = 'Output res: {}x{}'.format(frame_width, frame_height)
+            out_res = f'Output res: {frame_width}x{frame_height}'
             cv2.putText(frame, out_res, (11, 51), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
             cv2.putText(frame, f'{pose} ({conf:0.4})', (11, 70), font, 0.35, (0, 255, 0), 1, cv2.LINE_AA)
 
@@ -150,10 +150,10 @@ def main(vid:Param("Use video sample?", store_true),
             # --> (squat counter)
             cv2.putText(frame, f'Squats: {squats}', (11, frame_height-80), font, 2, (5, 10, 5), 6, cv2.LINE_AA)
             cv2.putText(frame, f'Squats: {squats}', (11, frame_height-80), font, 2, (255, 255, 255), 2, cv2.LINE_AA)
-            if (pose == '07_squatDown') & (squats == 3): 
-                cv2.putText(frame, f'lightweight baby', (140, 240), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
-            if pose == '06_overheadPress': 
-                cv2.putText(frame, f'nothing but a peanut', (120, 170), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+            if (n > 192) & (n< 205): 
+                cv2.putText(frame, f'lightweight baby', (375, 215), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+            if (pose == '06_overheadPress') & (n > 339) & (n < 380): 
+                cv2.putText(frame, f'nothing but a peanut', (150, 200), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
 
 
             # OpenCV Show frame

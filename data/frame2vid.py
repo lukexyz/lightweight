@@ -19,7 +19,7 @@ for f in tqdm(img_list):
     size = (width,height)
     img_array.append(img)
 
-out = cv2.VideoWriter(f'{filename}.mp4', cv2.VideoWriter_fourcc(*"mp4v"), fps_out, size)
+out = cv2.VideoWriter(f'{output_folder}/{filename}.mp4', cv2.VideoWriter_fourcc(*"mp4v"), fps_out, size)
  
 for i in range(len(img_array)):
     out.write(img_array[i])

@@ -72,6 +72,7 @@ def main(vid:Param("Use video sample?", store_true),
     pose_dict: Dict[Tuple[str, str], [float, float]] = {}
     buffer_length = 10
     n = 0
+    atg, squats = 0, 0
 
     def load_model():
         # Initialize model weights
@@ -101,7 +102,7 @@ def main(vid:Param("Use video sample?", store_true),
             conf = max(preds[2])
             delta_t = 1000*round(_t['fps'].toc(), 4)
 
-            # ----------- table --------------
+            # =============== table ===============
             if len(pose_dict) > buffer_length - 1:
                 pose_dict.pop(list(pose_dict.keys())[0])
 
@@ -122,25 +123,42 @@ def main(vid:Param("Use video sample?", store_true),
 
             live_table.update(Align.center(table))
 
+            # ============= Squat Counter =============
+            if pose == '07_squatDown': 
+                atg += 1
+            if (pose == '05_frontUp') & (atg >= 3):  # 3 frames of atg (error correction)
+                squats += 1
+                atg = 0
+
+            # ============= Output Frame =============
             # Resize for video output
             frame = cv2.resize(frame, None, fx=1, fy=1)
 
             # Render Overlay
             _t['fps'].toc()
-            fps = 'FPS: {:.3f}'.format(1 / _t['fps'].diff)
+            fps = f'({n}) FPS: {1/_t["fps"].diff:.03f}'
             cv2.putText(frame, fps, (11, 15), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
-            res = 'Output-res: {}x{}'.format(frame.shape[0], frame.shape[1])
-            cv2.putText(frame, res, (11, 33), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
-            cv2.putText(frame, f'{pose} ({conf:0.4})', (11, 50), font, 0.35, (0, 255, 0), 1, cv2.LINE_AA)
+            in_res = f'Intput res: {frame.shape[1]}x{frame.shape[0]}'
+            cv2.putText(frame, in_res, (11, 33), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
+            out_res = f'Output res: {frame_width}x{frame_height}'
+            cv2.putText(frame, out_res, (11, 51), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(frame, f'{pose} ({conf:0.4})', (11, 70), font, 0.35, (0, 255, 0), 1, cv2.LINE_AA)
 
             # --> (pose label) Big text 
-            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (5, 10, 5), 6, cv2.LINE_AA)
-            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 1.5, (5, 10, 5), 6, cv2.LINE_AA)
+            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 1.5, (0, 255, 0), 2, cv2.LINE_AA)
+            # --> (squat counter)
+            cv2.putText(frame, f'Squats: {squats}', (11, frame_height-80), font, 2, (5, 10, 5), 6, cv2.LINE_AA)
+            cv2.putText(frame, f'Squats: {squats}', (11, frame_height-80), font, 2, (255, 255, 255), 2, cv2.LINE_AA)
+            if (n > 192) & (n< 205): 
+                cv2.putText(frame, f'lightweight baby', (375, 215), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+            if (pose == '06_overheadPress') & (n > 339) & (n < 380): 
+                cv2.putText(frame, f'nothing but a peanut', (150, 200), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+
 
             # OpenCV Show frame
             cv2.imshow('Webcam: lightweight', frame)
 
-            # SAVE FRAME
             if saveframe:
                 cv2.imwrite(f"data/saveframe_demo/{n:06d}_frame.jpg", frame)
 

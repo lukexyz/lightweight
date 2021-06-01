@@ -30,9 +30,10 @@ def check_cam_by_index(i):
 
 def check_multiple():
     for i in range(-1,10):
+        print('press q to cycle through webcam sources')
         try:
             print(f'checking camera #{i}')
-            print('press q for next')
+            
             check_cam_by_index(i)
         except:
             continue

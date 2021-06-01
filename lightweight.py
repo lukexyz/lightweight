@@ -1,3 +1,10 @@
+'''
+Usage
+> python lightwieght.py -h
+
+'''
+
+
 import cv2
 import torch
 import fastai
@@ -25,7 +32,8 @@ os.system('cls||clear')
 from utils.timer import Timer
 
 @call_parse
-def main(vid:Param("Use video sample?", store_true)):
+def main(vid:Param("Use video sample?", store_true),
+         saveframe:Param("Save output frames?", store_true)):
     "Print `sample`, video input source: webcam or video sample"
 
     if vid: start_text = 'sample video'
@@ -46,7 +54,7 @@ def main(vid:Param("Use video sample?", store_true)):
         # or 'data/squat_loop_540p.mp4'
         # or 'data/02_luke_sunlight_540p.mp4'
     else:
-        cap = cv2.VideoCapture(1)
+        cap = cv2.VideoCapture(0)
 
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -123,13 +131,19 @@ def main(vid:Param("Use video sample?", store_true)):
             cv2.putText(frame, fps, (11, 15), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
             res = 'Output-res: {}x{}'.format(frame.shape[0], frame.shape[1])
             cv2.putText(frame, res, (11, 33), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
-            cv2.putText(frame, f'{pose} ({conf})', (11, 50), font, 0.35, (255, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(frame, f'{pose} ({conf:0.4})', (11, 50), font, 0.35, (0, 255, 0), 1, cv2.LINE_AA)
 
-            # --> Big text
-            cv2.putText(frame, f'>{pose}', (11, 120), font, 2, (255, 255, 255), 2, cv2.LINE_AA)
+            # --> (pose label) Big text 
+            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'>{pose}', (11, frame_height-20), font, 2, (0, 255, 0), 2, cv2.LINE_AA)
 
             # OpenCV Show frame
             cv2.imshow('Webcam: lightweight', frame)
+
+            # SAVE FRAME
+            if saveframe:
+                cv2.imwrite(f"data/saveframe_demo/{n:06d}_frame.jpg", frame)
+
             k = cv2.waitKey(1) & 0xFF
             if k == 27:  # ESC TO QUIT
                 break

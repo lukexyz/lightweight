@@ -1,4 +1,5 @@
-# check_cv.py
+# webcam_checker.py
+# cycles through and identifies available webcams
 
 import numpy as np
 import cv2 as cv

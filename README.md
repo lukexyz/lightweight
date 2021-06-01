@@ -1,12 +1,18 @@
-# `lightweight`
 
-# 💪😬💪
-# 💪😙💪
-# 💪🤪💪 
+# 💪😬💪 `light`  💪🤪💪  `weight`  💪😙💪
 
-https://twitter.com/lukexyz/status/1378039243046592517
+</br>  
 
 ![image](https://user-images.githubusercontent.com/13252029/114288591-56985700-9a69-11eb-8509-988707672256.png)
+
+## Run
+```sh
+> conda activate lightweight
+# webcam
+> python lightweight.py 
+# sample vid
+> python lightweight.py --vid
+```
 
 
 ## Installation
@@ -17,6 +23,10 @@ https://twitter.com/lukexyz/status/1378039243046592517
 > conda install -c fastai -c pytorch -c anaconda fastai gh anaconda
 > pip install -r requirements.txt
 ```
+
+
+
+
 
 ## OpenPose Installation
 

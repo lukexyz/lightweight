@@ -1,6 +1,9 @@
 
 # `lightweight` 💪🎯💪
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lukexyz/lightweight/master/media/ronnie_catchphrase.JPG">
+</p>
 
 </br>  
 

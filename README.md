@@ -5,9 +5,7 @@
   <img src="https://raw.githubusercontent.com/lukexyz/lightweight/master/media/ronnie_catchphrase.JPG">
 </p>
 
-</br>  
 
-![image](https://user-images.githubusercontent.com/13252029/114288591-56985700-9a69-11eb-8509-988707672256.png)
 
 ## Run
 ```sh
@@ -17,8 +15,12 @@
 # sample vid 
 > python lightweight.py --vid --saveframe
 ```
-
+</br>  
 💪😬💪 💪🤪💪 💪😙💪
+
+![image](https://github.com/lukexyz/lightweight/blob/master/media/lw_demo_small.gif?raw=true)
+
+</br>  
 
 ## Installation
 

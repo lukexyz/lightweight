@@ -51,6 +51,7 @@ def main(vid:Param("Use video sample?", store_true),
     # ================== OpenCV Video Capture =================== #
     if vid:
         cap = cv2.VideoCapture('data/AlphaPose_squat_loop_540p.mp4')
+        cap = cv2.VideoCapture('data/girl.gif')
         # or 'data/squat_loop_540p.mp4'
         # or 'data/02_luke_sunlight_540p.mp4'
     else:

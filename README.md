@@ -5,6 +5,21 @@
   <img src="https://raw.githubusercontent.com/lukexyz/lightweight/master/media/ronnie_catchphrase.JPG">
 </p>
 
+A squat dectector algorithm running on [`fastai`](https://github.com/fastai/fastai) and [`alphapose`](https://github.com/MVIG-SJTU/AlphaPose). 
+
+The classifier uses the AlphaPose network as an itermediate step, and trains quickly using a pretrained `resnet34` couretesy of `fastai v2`. Each frame is classified as one of 7 labels that I made up from my exercise routine. 
+
+</br>  
+
+![image](https://github.com/lukexyz/lightweight/blob/master/media/lw_demo_small.gif?raw=true)
+💪😬💪 💪😙💪 💪🤪💪
+</br>  
+</br>  
+
+## Dataset and Training
+
+
+![image](https://github.com/lukexyz/lightweight/blob/master/media/training_results.JPG?raw=true)
 
 
 ## Run
@@ -15,12 +30,7 @@
 # sample vid 
 > python lightweight.py --vid --saveframe
 ```
-</br>  
-💪😬💪 💪🤪💪 💪😙💪
 
-![image](https://github.com/lukexyz/lightweight/blob/master/media/lw_demo_small.gif?raw=true)
-
-</br>  
 
 ## Installation
 
@@ -39,7 +49,7 @@
 
 [CMU-Perceptual-Computing-Lab/openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation/0_index.md#operating-systems-requirements-and-dependencies)
 
-## AlphaPose Installation
+### AlphaPose Installation
 [MVIG-SJTU/AlphaPose](https://github.com/MVIG-SJTU/AlphaPose/blob/master/docs/INSTALL.md)
 ```sh
 # 1. New conda env
@@ -50,7 +60,7 @@ conda activate alphapose
 conda install pytorch==1.1.0 torchvision==0.3.0
 ```
 
-# 3. Get AlphaPose
+### Get AlphaPose
 ```sh
 git clone https://github.com/MVIG-SJTU/AlphaPose.git
 # git pull origin pull/592/head if you use PyTorch>=1.5
@@ -60,20 +70,4 @@ cd AlphaPose
 -- export PATH=/usr/local/cuda/bin/:$PATH
 -- export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
 python -m pip install cython
-```
-
-## tf-Openpose Installation
-```sh
-git clone https://github.com/infocom-tpo/tf-openpose.git
-cd tf-openpose
-
-conda create -n tf-openpose python=3.6 pip jupyter
-conda activate tf-openpose
-pip install tensorflow==1.3.0
-pip install opencv-python==3.4.3.18
-pip install -r requirements.txt
-
-# might need to rename model dir from here https://qiita.com/kotauchisunsun/items/bdbdca2ddb9036e29ab1
-python realtime_webcam.py --camera=0 --model=mobilenet --zoom=1.0
-python inference.py --model=mobilenet --imgpath=./images/golf.jpg
 ```

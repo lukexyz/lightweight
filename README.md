@@ -17,7 +17,7 @@ The classifier uses the AlphaPose network as an itermediate step, and trains qui
 
 I spent a long time trying to make this train on the regular unprocessed images from my webcam feed – it didn’t work.
 
-The whole secret to training this network so simply and quickly (which I eventually figured out…) was to use an intermediate network – in this case AlphaPose, a paper from 2018. It was a SOTA method that detects human poses and draws these colorful lines between the nodes.
+The whole secret to training this network so simply and quickly (which I eventually figured out…) was to use an intermediate network – in this case [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), a paper from 2018. It was SOTA. A method that detects human poses and draws these colorful lines between the nodes.
 
 As soon as the resnet34 was looking at the colorful pose outputs instead of the raw images, it converged within a handful of epochs. It was amazing to realize the power of stacking these networks together.
 

@@ -26,7 +26,7 @@ As soon as the resnet34 was looking at the colorful pose outputs, instead of the
 
 
 ### Dataset
-I built the dataset myself by taking a couple of videos, and extracting the noteworthy frames and uploading them to labelbox.com.
+I built the dataset myself by taking a couple of videos and extracting the noteworthy frames, then uploading them to labelbox.com.
 
 I manually labelled them into 6 categories (took me about 1 hour) the whole thing was free – and also the entire dataset was only **196 images**.
 

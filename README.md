@@ -17,18 +17,18 @@ The classifier uses the AlphaPose network as an itermediate step, and trains qui
 
 I spent a long time trying to make this train on the regular unprocessed images from my webcam feed – it didn’t work.
 
-The whole secret to training this network so simply and quickly (which I eventually figured out…) was to use an intermediate network – in this case [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), a paper from 2018. It was SOTA. A method that detects human poses and draws these colorful lines between the nodes.
+The whole secret to training this network so simply and quickly (which I eventually figured out) was to use an intermediate network – in this case [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), a paper from 2018. Alphapose estimates the pose position and draws the colorful lines between the nodes.
 
-As soon as the resnet34 was looking at the colorful pose outputs instead of the raw images, it converged within a handful of epochs. It was amazing to realize the power of stacking these networks together.
+As soon as the resnet34 was looking at the colorful pose outputs, instead of the raw images, it converged within a handful of epochs. It was cool to see the power of stacking these networks together.
 
 
 ![image](https://github.com/lukexyz/lightweight/blob/master/media/training_results.JPG?raw=true)
 
 
 ### Dataset
-I literally just built my own dataset by taking a couple of videos and extracting noteworthy frames then uploaded them to labelbox.com.
+I built the dataset myself by taking a couple of videos, and extracting the noteworthy frames and uploading them to labelbox.com.
 
-I manually labelled them into 6 categories (took me about 1 hour…) the whole thing is free – and also the entire dataset was only 195 images.
+I manually labelled them into 6 categories (took me about 1 hour) the whole thing was free – and also the entire dataset was only **196 images**.
 
 ## Run
 ```sh

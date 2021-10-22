@@ -5,9 +5,9 @@
   <img src="https://raw.githubusercontent.com/lukexyz/lightweight/master/media/ronnie_catchphrase.JPG">
 </p>
 
-A squat dectector algorithm running on [`fastai`](https://github.com/fastai/fastai) and [`alphapose`](https://github.com/MVIG-SJTU/AlphaPose). 
+A squat detector algorithm running on [`fastai`](https://github.com/fastai/fastai) and [`alphapose`](https://github.com/MVIG-SJTU/AlphaPose). 
 
-The classifier uses the AlphaPose network as an itermediate step, and trains quickly using a pretrained `resnet34` couretesy of `fastai v2`. Each frame is classified as one of 7 labels that I made up from my exercise routine. 
+The classifier uses the AlphaPose network as an intermediate step, and trains quickly using a pretrained `resnet34` courtesy of `fastai v2`. Each frame is classified as one of 7 labels that I made up from my exercise routine. 
 
 </br>  
 
